@@ -1,0 +1,33 @@
+Two pointer approach: uses tow pointer (left,right) left++.right--
+
+USED WHEN:- Min/max,count,search,sum,pair,reverse array,palindrome... keyword you find.
+
+Example:-Reverse an array
+int arr[] = {1,2,3,4,5};
+int n = 5;
+
+int l = 0;
+int r = n - 1;
+
+while(l < r){
+    swap(arr[l], arr[r]);
+    l++;
+    r--;
+}
+
+
+Example2:- palindrome checking
+string s = "madam";
+int l = 0, r = s.size()-1;
+bool ok = true;
+
+while(l < r){
+   if(s[l] != s[r]){
+      ok = false;
+      break;
+   }
+   l++;
+   r--;
+}
+
+
