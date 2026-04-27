@@ -1,0 +1,40 @@
+Hashmap:- uses unordered map,
+using :- unordered_map<int,int>mp;
+
+Used:- count duplicates, most frequencies, first unique, how many times, unique , frequencies, duplicates;
+
+Example:Count Frequency of Numbers
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int arr[] = {2,1,2,3,1,2};
+    int n = 6;
+
+    unordered_map<int,int> freq;
+
+    for(int i=0;i<n;i++){
+        freq[arr[i]]++;
+    }
+
+    for(auto x : freq){
+        cout << x.first << " -> " << x.second << endl;
+    }
+}
+
+
+Eample 2:First Non-Repeating Character..
+
+Example:
+string s = "aabbcddee";
+unordered_map<char,int> mp;
+
+for(char ch : s) mp[ch]++;
+
+for(char ch : s){
+    if(mp[ch] == 1){
+        cout << ch;
+        break;
+    }
+}
