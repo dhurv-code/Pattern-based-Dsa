@@ -1,8 +1,8 @@
-When to Think Sliding Window
+When to Think Sliding Window---->sum-[i-k]+arr[i]
 
 If question says:continuous subarray,consecutive elements,substring,longest/shortest segment,max sum of size k;
 
-Problem 1: Max Sum of Size K
+Problem 1: Max Sum of Size K [this is fixed size]
 // Online C++ compiler to run C++ program online
 // sliding window
 #include <iostream>
@@ -25,3 +25,41 @@ int main() {
     }
     cout<<mx;
 }
+
+
+
+
+Example 2- for Variable sliding window  -->>>>>>[left-right+1]----->window size.
+mostly interviwer ask this
+
+Used when:- Longest Substring without repeating character, smallest ssubarray, max consecutive , Longest unique segment
+
+**We use the two pointer (left, right)**
+
+Problem 1: Smallest Subarray Sum ≥ Target
+[2,1,5,2,3,2]
+target = 7
+
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#include <climits>
+int main() {
+    int num[]={2,1,5,2,3,2};
+    int n=sizeof(num)/sizeof(num[0]);
+    int target=7;
+    int left=0, sum=0;
+    int ans= INT_MAX;
+    for(int right=0; right<n; right++){
+        sum+=num[right];
+        
+        while(sum>=target){
+            ans=min(ans,right-left+1);
+            sum-=num[left];
+            left++;
+        }
+    }
+
+    cout<< ans;
+}
+
