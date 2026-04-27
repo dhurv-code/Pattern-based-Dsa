@@ -1,0 +1,27 @@
+When to Think Sliding Window
+
+If question says:continuous subarray,consecutive elements,substring,longest/shortest segment,max sum of size k;
+
+Problem 1: Max Sum of Size K
+// Online C++ compiler to run C++ program online
+// sliding window
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+int main() {
+    int nums[]={4,2,7,1};
+    int size= sizeof(nums)/sizeof(nums[0]);
+    int k=2;
+    int sum=0;a
+    
+    for(int i=0;i<k;i++){
+        sum+=nums[i];
+    }
+    int mx=sum;
+    
+    for(int i=k;i<size;i++){
+        sum=sum-nums[i-k]+nums[i];
+        mx=max(mx,sum);
+    }
+    cout<<mx;
+}
