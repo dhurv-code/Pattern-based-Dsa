@@ -1,0 +1,22 @@
+for level traversing we use bfs that uses queue data structure
+
+example:
+#include stdio.h
+usign namespace std;
+void levelOrder(Node* root){
+    if(root==NULL){
+        return ;
+    }
+    queue<Node*>q;
+    q.push(root);
+    
+    while(!q.empty()){
+        Node* curr=q.front()
+        q.pop();
+        
+        cout<<curr->data;
+        if(curr->left)q.push(curr->right);
+        if(curr->right)q.push(curr->left);
+        
+    }
+};
