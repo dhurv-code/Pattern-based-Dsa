@@ -1,0 +1,17 @@
+BST = sorted structure-->we can use binary search logic on tree-->O(log n) average
+
+search in bst:
+#include stdio.h
+usign namespace std;
+
+bool search(node* root, int key){
+    if(root==NULL) return false;
+    if(root->data==key)return true;
+    
+    if(root->data<key){
+        return search(root->left,key)
+    }
+    else(){
+        return search(root->right,key)
+    }
+}
