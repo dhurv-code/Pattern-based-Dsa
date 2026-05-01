@@ -1,0 +1,31 @@
+mostly trees are uses recursion methd.
+
+struct Node{
+  int data;
+  Node* left;
+  Node* right;
+
+  Node(int val){
+    data=val;
+    left=right=NULL;
+    }
+  };
+  
+
+
+  Used in: ->>Hierarchies,Searching,Databases,File systems,Interview questions (very common)
+
+  Traversals:->
+  Inorder->Left → Root → Right
+  Preorder->Root → Left → Right
+  Postorder->Left → Right → Root
+
+  Ex:-void preorder(node* root){
+    if(root==NULL){
+        return
+    }
+    cout<<root->data;
+    preorder(root->left);
+    preorder(root->right);
+    
+}
