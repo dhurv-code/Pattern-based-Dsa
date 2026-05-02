@@ -1,0 +1,19 @@
+BFS:::----->>>>queue
+void bfs(int start, vector<int>adj[], int n){
+  vector<int>visited(n+1,false);
+  queue<int>q;
+  q.push(start);
+  visited[start]=true;
+  while(!q.empty){
+    int node=q.front();
+    q.pop();
+
+    cout<<node<<endl;
+
+    for(int i: adj[node]){
+      if(!visited[i]){
+        visited[i]==true;
+        q.push(i);
+
+}
+}}
