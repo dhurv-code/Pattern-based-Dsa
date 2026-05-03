@@ -1,0 +1,20 @@
+just write the code for bfs., as bfs only can give the shortest path.
+
+void bfs(int start, vector<int>adj[] , int n){
+  vector<int>dist(n+1,INT_MAX);
+
+  queue<int>q;
+  q.push(start);
+  dist[start]=0;
+
+  while(!q.empty()){
+    int node=q.front();
+    q.pop;
+
+    for(int i: node){
+      if(dist[i]==INT_MAX){
+        dist[i]=dist[node]+1
+        q.push(i);
+}
+}
+}
