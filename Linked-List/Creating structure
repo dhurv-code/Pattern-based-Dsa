@@ -1,0 +1,41 @@
+struct Node{
+    int data;
+    Node* next;
+    
+    Node(int val){
+        data=val;
+        next=NULL:
+    }
+}
+
+//traversing::-> problem no.1
+void print(Node* head){
+    Node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->data;
+        temp=temp->next;
+    }
+}
+
+//Insertion at beginning
+Node* insertNode(Node* head,int val){
+    Node* newNode=new Node(val);
+    newNode->next=head;
+    return newNode;
+}
+
+
+//Reversing Linked List
+
+Node *reverse(Node*head){
+    Node * curr=head;
+    Node * prev=NULL;
+    
+    while(curr!=NULL){
+        Node* next=curr->next;
+        curr->next=prev;
+        
+        prev=curr;
+        curr=next
+    }
+}
