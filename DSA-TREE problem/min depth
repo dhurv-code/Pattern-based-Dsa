@@ -12,5 +12,5 @@ public:
         }
 
         return 1+min(left,right);
-    {}}}
+    }
 };
