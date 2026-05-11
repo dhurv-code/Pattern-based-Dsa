@@ -1,7 +1,6 @@
 DP is NOT a new concept.It is just:
 
-Recursion + storing answers to avoid repetition
-
+Recursion + storing answers to avoid repetitions.
 
 DP Idea::::
 Don’t calculate same thing again → store it
