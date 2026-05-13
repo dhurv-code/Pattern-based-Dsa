@@ -1,0 +1,30 @@
+    class Solution {
+    public:
+        bool solve(int i, string &s, unordered_set<string> &st,vector<int> &dp){
+            // recursive function
+
+            if(i==s.length()){
+                return true;
+            }
+            if(dp[i] != -1) {
+            return dp[i];
+        }
+
+            for(int j=i+1;j<=s.length();j++){
+                string word=s.substr(i,j-i);
+
+                if(st.count(word)){
+                    if(solve(j,s,st,dp)){
+                        return dp[i]=true;
+                    }
+                }
+            }
+            return dp[i] =false;
+        }
+        bool wordBreak(string s, vector<string>& wordDict) {
+            unordered_set<string>st(wordDict.begin(),wordDict.end());
+            vector<int> dp(s.length(), -1);
+            return solve(0,s,st,dp);
+            
+        }
+    };
