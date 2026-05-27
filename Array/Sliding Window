@@ -2,6 +2,14 @@ When to Think Sliding Window---->sum-[i-k]+arr[i]
 
 If question says:continuous subarray,consecutive elements,substring,longest/shortest segment,max sum of size k;
 
+"""Sliding window usually works when:
+
+expanding window increases sum
+shrinking window decreases sum"""
+
+
+
+
 Problem 1: Max Sum of Size K [this is fixed size]
 // Online C++ compiler to run C++ program online
 // sliding window
