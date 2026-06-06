@@ -11,8 +11,8 @@ public:
                 mp[fruits[l]]--;
                 if(mp[fruits[l]]==0){
                     mp.erase(fruits[l]);
-                l++;
                 }
+                l++;
             }
             ans=max(ans,i-l+1);
 
