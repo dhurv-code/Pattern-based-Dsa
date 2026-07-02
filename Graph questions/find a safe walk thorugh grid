@@ -1,0 +1,55 @@
+class Solution {
+public:
+    bool dfs(vector<vector<int>>& grid, int i, int j, int health,
+             vector<vector<vector<bool>>>& vis) {
+
+        // Out of bounds
+        if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size())
+            return false;
+
+        // Lose health if current cell is unsafe
+        if (grid[i][j] == 1)
+            health--;
+
+        // Health exhausted
+        if (health <= 0)
+            return false;
+
+        // Destination reached
+        if (i == grid.size() - 1 && j == grid[0].size() - 1)
+            return true;
+
+        // Already visited with the same health
+        if (vis[i][j][health])
+            return false;
+
+        vis[i][j][health] = true;
+
+        if (dfs(grid, i + 1, j, health, vis))
+            return true;
+
+        if (dfs(grid, i - 1, j, health, vis))
+            return true;
+
+        if (dfs(grid, i, j + 1, health, vis))
+            return true;
+
+        if (dfs(grid, i, j - 1, health, vis))
+            return true;
+
+        return false;
+    }
+
+    bool findSafeWalk(vector<vector<int>>& grid, int health) {
+
+        int m = grid.size();
+        int n = grid[0].size();
+
+        vector<vector<vector<bool>>> vis(
+            m,
+            vector<vector<bool>>(n, vector<bool>(health + 1, false))
+        );
+
+        return dfs(grid, 0, 0, health, vis);
+    }
+};
