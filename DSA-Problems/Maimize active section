@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int maxActiveSectionsAfterTrade(string s) {
+        string t = "1" + s + "1";
+
+        int originalOnes = 0;
+        for(char ch : s)
+            if(ch == '1')
+                originalOnes++;
+        vector<int> runs;
+        vector<char> type;
+
+        int i = 0;
+        while(i < t.size()){
+
+            char ch = t[i];
+            int cnt = 0;
+
+            while(i < t.size() && t[i] == ch){
+                cnt++;
+                i++;
+            }
+
+            runs.push_back(cnt);
+            type.push_back(ch);
+        }
+        int gain = 0;
+         for(int i = 1; i + 1 < runs.size(); i++){
+
+            if(type[i] == '1' && type[i-1] == '0' &&
+               type[i+1] == '0'){
+
+                gain = max(gain,
+                           runs[i-1] + runs[i+1]);
+            }
+        }
+    return originalOnes + gain;
+                
+
+    }
+};
