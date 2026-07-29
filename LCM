@@ -1,0 +1,27 @@
+// Online C++ compiler to run C++ program online.
+// Find the GCD of two numbers.
+// Find the LCM of two numbers.
+#include <iostream>
+using namespace std;
+#include <cmath>
+int main() {
+    int a=18;
+    int b=12;
+    int num1=a;
+    int num2=b;
+    
+    while(b>0){
+        int remainder=a%b;
+        a=b;
+        b=remainder;
+    }
+    int gcd=a;
+    int LCM=(num1*num2)/gcd;
+    
+ 
+    cout<<LCM;
+    
+        
+    
+    return 0;
+}
