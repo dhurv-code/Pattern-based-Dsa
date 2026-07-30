@@ -1,0 +1,18 @@
+
+#include <iostream>
+using namespace std;
+// #include <iterator>
+int main() {
+    int nums[]={1,2,3,4};
+    int size = sizeof(nums) / sizeof(nums[0]);
+    int start=0;
+    int end=size-1;
+    while(start<end){
+        int temp=nums[start];
+        nums[start]=nums[end];
+        nums[end]=temp;
+        start++;
+        end--;
+    }
+    return 0;
+}
