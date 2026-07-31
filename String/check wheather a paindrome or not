@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s= "abacba";
+    int len=0;
+    while(s[len]!='\0'){
+        len++;
+    }
+    string original=s;
+    int st=0;
+    int end=len-1;
+    while(st<end){
+        int temp=s[st];
+        s[st]=s[end];
+        s[end]=temp;
+        st++;
+        end--;
+    }
+    if(s==original){
+        cout<<"palindrome";
+    }
+    else{
+        cout<<"not palindrome";
+    }
+    return 0;
+}
