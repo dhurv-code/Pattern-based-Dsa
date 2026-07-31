@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s= "abauifcba";
+    int vowels=0;
+    int consonants=0;
+    for(int i=0; s[i]!='\0';i++){
+        char c=s[i];
+        
+        if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u'){
+            vowels++;
+        }
+        else{
+            consonants++;
+        }
+    }
+    cout<<vowels;
+    cout<<"\n";
+    cout<<consonants;
+    
+    return 0;
+}
