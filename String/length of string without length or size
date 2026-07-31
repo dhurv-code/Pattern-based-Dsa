@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+#include <climits>
+
+int main() {
+    string s= "abcdef";
+    int count=0;
+    for(char c:s){
+        count++;
+    }
+    cout<<count;
+
+    return 0;
+}
