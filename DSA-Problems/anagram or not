@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+#include <unordered_map>
+#include <string>
+#include <algorithm>
+int main() {
+   string s1="string";
+   string s2="trings";
+   sort(s1.begin(),s1.end());
+   sort(s2.begin(),s2.end());
+   if(s1==s2){
+       cout<<"yes it is anagram";
+   }
+   else{
+       cout<<"not an anagram";
+   }
+    
+    
+
+    return 0;
+}
