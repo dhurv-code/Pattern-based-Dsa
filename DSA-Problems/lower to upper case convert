@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s="I love you xxx";
+    for(char i=0; s[i]!='\0';i++){
+        if(s[i]>'a'&& s[i]<'z'){
+            s[i]=s[i]-32;
+        }
+    }
+    cout<<s;
+    
+
+    return 0;
+}
