@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+#include <unordered_map>
+int main() {
+    string s="Iloveyouxxx";
+    unordered_map<char,int>mp;
+    for(char c:s){
+        mp[c]++;
+    }
+    char result='\0';
+    for(char c:s){
+        if(mp[c]==1){
+            result=c;
+            break;
+        }
+    }
+    cout<<result;
+    
+    
+
+    return 0;
+}
