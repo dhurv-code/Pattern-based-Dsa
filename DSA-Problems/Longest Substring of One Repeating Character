@@ -1,0 +1,98 @@
+class Solution {
+public:
+
+    struct Node {
+        char leftChar;
+        char rightChar;
+        int leftCount;   // same characters from the left
+        int rightCount;  // same characters from the right
+        int maxLen;      // longest repeating substring
+        int len;         // length of this segment
+    };
+    vector<Node> tree;
+    Node merge(Node a, Node b) {
+        Node res;
+        // Character at the extreme left
+        res.leftChar = a.leftChar;
+
+        // Character at the extreme right
+        res.rightChar = b.rightChar;
+
+        // Total length
+        res.len = a.len + b.len;
+
+        // Initially, prefix and suffix come from their own segments
+        res.leftCount = a.leftCount;
+        res.rightCount = b.rightCount;
+        // Initially, best answer is from either left or right segment
+        res.maxLen = max(a.maxLen, b.maxLen);
+        // If boundary characters are same,
+        // we can join the two groups
+        if (a.rightChar == b.leftChar) {
+            // Join suffix of left + prefix of right
+            res.maxLen = max(res.maxLen,a.rightCount + b.leftCount);
+
+            // If the ENTIRE left segment has the same character,
+            // its prefix can extend into the right segment
+            if (a.leftCount == a.len) {
+                res.leftCount =
+                    a.len + b.leftCount;
+            }
+            // If the ENTIRE right segment has the same character,
+            // its suffix can extend into the left segment
+            if (b.rightCount == b.len) {
+                res.rightCount =b.len + a.rightCount;
+            }
+        }
+
+        return res;
+    }
+
+    void build(int node, int l, int r, string &s) {
+        if (l == r) {
+            tree[node] = {s[l],s[l],1,1,1,1};
+            return;
+        }
+        int mid = (l + r) / 2;
+        build(node * 2, l, mid, s);
+        build(node * 2 + 1, mid + 1, r, s);
+        tree[node] =merge(tree[node * 2], tree[node * 2 + 1]);
+    }
+    void update(int node, int l, int r,int index, char c) {
+        // Found the character to update
+        if (l == r) {
+
+            tree[node] = {c,c,1,1,1,1};
+            return;
+        }
+        int mid = (l + r) / 2;
+        if (index <= mid) {
+            update(node * 2, l, mid, index, c);
+        }
+        else {
+            update(node * 2 + 1, mid + 1, r, index, c);
+        }
+        tree[node] =merge(tree[node * 2], tree[node * 2 + 1]);
+    }
+    vector<int> longestRepeating(string s,string queryCharacters,vector<int>& queryIndices) {
+
+        int n = s.size();
+
+        tree.resize(4 * n);
+        build(1, 0, n - 1, s);
+        vector<int> ans;
+
+        
+        for (int i = 0; i < queryIndices.size(); i++) {
+            int index = queryIndices[i];
+            char c = queryCharacters[i];
+            s[index] = c;
+            // Update segment tree
+            update(1, 0, n - 1, index, c);
+
+            // Root represents the entire string
+            ans.push_back(tree[1].maxLen);
+        }
+        return ans;
+    }
+};
