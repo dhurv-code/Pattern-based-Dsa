@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int largestInteger(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int>count;
+
+        for(int right=0;right<=n-k;right++){
+            set<int>current;
+            for(int j=right;j<right+k;j++){
+                current.insert(nums[j]);
+            }
+            for(int x:current){
+                count[x]++;
+
+            }
+        }
+        int answer=-1;
+        for(auto[x,freq]:count){
+            if(freq==1){
+                answer=max(answer,x);
+            }
+        }
+        return answer;
+    }
+};
