@@ -1,0 +1,49 @@
+class Solution {
+public:
+    long long findKthSmallest(vector<int>& coins, int k) {
+        int n=coins.size();
+        vector<long long> subsetLcm(1 << n, 1);
+        vector<int> bitCount(1 << n, 0);
+        
+        for (int mask = 1; mask < (1 << n); mask++) {
+            int lsb = mask & (-mask);
+            int idx = __builtin_ctz(lsb);
+            int prevMask = mask ^ lsb;
+            
+            long long g = __gcd((long long)coins[idx], subsetLcm[prevMask]);
+            long long l = (long long)coins[idx] / g * subsetLcm[prevMask];
+            
+            // Cap to avoid overflow — if lcm exceeds a safe bound, we can just cap it
+            // since it will never divide into our search range meaningfully.
+            if (l > (long long)2e18) l = (long long)2e18;
+            
+            subsetLcm[mask] = l;
+            bitCount[mask] = bitCount[prevMask] + 1;
+        }
+        
+        auto countLE = [&](long long x) -> long long {
+            long long total = 0;
+            for (int mask = 1; mask < (1 << n); mask++) {
+                long long l = subsetLcm[mask];
+                long long cnt = (l > x) ? 0 : x / l;
+                if (bitCount[mask] % 2 == 1) total += cnt;
+                else total -= cnt;
+            }
+            return total;
+        };
+        
+        long long minCoin = *min_element(coins.begin(), coins.end());
+        long long lo = minCoin, hi = minCoin * (long long)k;
+        
+        while (lo < hi) {
+            long long mid = lo + (hi - lo) / 2;
+            if (countLE(mid) >= k) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        
+        return lo;
+    }
+};
