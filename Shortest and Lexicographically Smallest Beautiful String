@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string shortestBeautifulSubstring(string s, int k) {
+        int n=s.size();
+        string ans="";
+        int minLen=INT_MAX;
+
+        vector<int>onespos;
+        for(int i=0;i<n;i++){
+            if(s[i]=='1') onespos.push_back(i);
+        }
+
+        int m=onespos.size();
+        if(m<k){
+            return "";
+        }
+        for (int i = 0; i + k - 1 < m; i++) {
+            int startOne = onespos[i];        
+            int endOne = onespos[i + k - 1];   
+            int start = startOne;
+            int end = endOne;
+            int len = end - start + 1;
+            
+            string candidate = s.substr(start, len);
+            
+            if (len < minLen) {
+                minLen = len;
+                ans = candidate;
+            } else if (len == minLen) {
+                if (candidate < ans) { 
+                    ans = candidate;
+                }
+            }
+        }
+        
+        return ans;
+    }
+  };
