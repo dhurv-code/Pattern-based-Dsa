@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string lexGreaterPermutation(string s, string target) {
+        int n=s.size();
+        vector<int>curCnt(26,0);
+        for(char ch:s) curCnt[ch-'a']++;
+
+        int lastPos=-1;
+        vector<int>saveCnt(26,0);
+
+        for(int i=0;i<n;i++){
+            int tc=target[i]-'a';
+            bool hasGreater=false;
+            for(int c=tc+1;c<26;c++){
+                if(curCnt[c]>0) {hasGreater=true; break;}
+            }
+            if(hasGreater){
+                lastPos=i;
+                saveCnt=curCnt;
+            }
+            if(curCnt[tc]>0){
+                curCnt[tc]--;
+            }else{break;};
+        }
+        if(lastPos==-1) return "";
+        string result= target.substr(0,lastPos);
+        int tc=target[lastPos]-'a';
+        int chosen =-1;
+        for(int c=tc+1;c<26;c++){
+            if(saveCnt[c]>0){chosen=c; break;}
+        }
+        saveCnt[chosen]--;
+        result +=(char)('a'+chosen);
+
+        for(int c=0;c<26;c++){
+            result+=string(saveCnt[c], (char)('a'+c));
+        }
+        return result;
+    }
+};
