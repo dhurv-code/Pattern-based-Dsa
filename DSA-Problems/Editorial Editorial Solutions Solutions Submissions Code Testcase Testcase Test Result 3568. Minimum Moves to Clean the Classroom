@@ -1,0 +1,116 @@
+class Solution {
+public:
+    int minMoves(vector<string>& classroom, int energy) {
+
+        int m = classroom.size();
+        int n = classroom[0].size();
+
+        int sr = -1, sc = -1;
+
+        // Give every litter an ID
+        vector<vector<int>> litterId(m, vector<int>(n, -1));
+
+        int litterCount = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (classroom[i][j] == 'S') {
+                    sr = i;
+                    sc = j;
+                }
+
+                if (classroom[i][j] == 'L') {
+                    litterId[i][j] = litterCount++;
+                }
+            }
+        }
+
+        int allCollected = (1 << litterCount) - 1;
+
+        // maxEnergy[r][c][mask]
+        // = maximum energy with which we have reached this state
+        vector<vector<vector<int>>> maxEnergy(
+            m,
+            vector<vector<int>>(
+                n,
+                vector<int>(1 << litterCount, -1)
+            )
+        );
+
+        struct State {
+            int r;
+            int c;
+            int mask;
+            int energy;
+            int dist;
+        };
+
+        queue<State> q;
+
+        q.push({sr, sc, 0, energy, 0});
+        maxEnergy[sr][sc][0] = energy;
+
+        int dr[] = {-1, 1, 0, 0};
+        int dc[] = {0, 0, -1, 1};
+
+        while (!q.empty()) {
+
+            State cur = q.front();
+            q.pop();
+
+            // All litter collected
+            if (cur.mask == allCollected) {
+                return cur.dist;
+            }
+
+            // No energy -> cannot make another move
+            if (cur.energy == 0) {
+                continue;
+            }
+
+            for (int d = 0; d < 4; d++) {
+
+                int nr = cur.r + dr[d];
+                int nc = cur.c + dc[d];
+
+                // Outside grid
+                if (nr < 0 || nr >= m ||
+                    nc < 0 || nc >= n) {
+                    continue;
+                }
+
+                // Obstacle
+                if (classroom[nr][nc] == 'X') {
+                    continue;
+                }
+
+                // One move costs one energy
+                int newEnergy = cur.energy - 1;
+
+                // Current collected litter
+                int newMask = cur.mask;
+
+                // If we enter litter
+                if (classroom[nr][nc] == 'L') {
+                    int id = litterId[nr][nc];
+                    newMask |= (1 << id);
+                }
+
+            
+                if (classroom[nr][nc] == 'R') {
+                    newEnergy = energy;
+                }
+                if (maxEnergy[nr][nc][newMask] >= newEnergy) {
+                    continue;
+                }
+
+                maxEnergy[nr][nc][newMask] = newEnergy;
+
+                q.push({nr,nc,newMask,newEnergy,cur.dist + 1});
+            }
+        }
+
+        return -1;
+    }
+};
