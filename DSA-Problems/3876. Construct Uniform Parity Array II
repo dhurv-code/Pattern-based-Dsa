@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool uniformArray(vector<int>& nums1) {
+    
+        int minEven=INT_MAX;
+        int minOdd=INT_MAX;
+
+        bool hasEven=false;
+        bool hasOdd=false;
+
+        for(int x:nums1){
+            if(x%2==0){
+                hasEven=true;
+                minEven=min(minEven,x);
+            }
+            else{
+                hasOdd=true;
+                minOdd=min(minOdd,x);
+            }
+        }
+
+        bool canEven=!hasOdd;
+
+        bool canOdd;
+        if(!hasEven){
+            canOdd=true;
+        }
+        else if(!hasOdd){
+            canOdd=false;
+        }
+        else{
+            canOdd=(minOdd<minEven);
+        }
+        return canEven||canOdd;
+    }
+};
