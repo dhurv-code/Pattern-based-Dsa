@@ -2,16 +2,8 @@ class Solution {
 public:
     int countCommas(long long n) {
         long long ans=0;
-        long long start =1000;
-        long long commas=1;
-
-        while(start<=n){
-            long long end = start * 1000 - 1;
-            long long count = min(n, end) - start + 1;
-            ans += count * commas;
-
-            start *= 1000;
-            commas++;
+        for(long long i=1000;i<=n;i*=100){
+            ans+=n-i+1;
         }
         return ans;
 
