@@ -1,0 +1,11 @@
+stringgg="abcdefghijklmnopqrstuvwxyz"
+vowel=0
+consonant=0
+lst=['a','e','i','o','u']
+for i in stringgg:
+  if i in lst:
+    vowel+=1
+  else:
+    consonant+=1
+print(vowel)
+print(consonant)
