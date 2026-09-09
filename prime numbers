@@ -1,0 +1,13 @@
+a=7
+if(a<2):
+  print("a is not prime number")
+else:
+  is_prime=True
+  for i in range(2,a):
+    if a%i==0:
+      is_prime=False
+      # print("not a prime")
+  if is_prime:
+    print("prime number")
+  else:
+    print("not a prime number")
