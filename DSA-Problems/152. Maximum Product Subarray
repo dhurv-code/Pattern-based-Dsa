@@ -4,7 +4,7 @@ public:
         int n=nums.size();
         int maxProd=nums[0];
         int minProd=nums[0];
-        int result=0;
+        int result=nums[0];
         for(int i=1;i<n;i++){
             int curr=nums[i];
             if(curr<0){
