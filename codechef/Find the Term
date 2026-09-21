@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	string s,k;
+	getline(cin,s);
+	getline(cin,k);
+	
+	if(s.find(k)!=string::npos){
+	    cout<<"YES";
+	}
+	else{
+	    cout<<"NO";
+	}
+
+}
