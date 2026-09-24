@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int smallestIndex(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++){
+            int num=nums[i];
+            int ans=0;
+            while(num>0){
+                int digit=num%10;
+                ans+=digit;
+                num/=10;
+            }
+            if(ans==i)
+                return i;
+        }
+        return -1;
+    }
+};
