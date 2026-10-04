@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        int n=s.length();
+        if(numRows==1 || numRows>=n) return s;
+
+        string result="";
+        int cycle=2*numRows-2;
+
+        // loop for every row
+        for(int r=0;r<numRows;r++){
+            // put the letter in the box according to cycle
+            for(int i=r;i<n;i+=cycle){
+                result+=s[i];
+
+                // for middle row find diagonal character
+                int diagonal=i+cycle-2*r;
+                if(r>0&&r<numRows-1&&diagonal<n){
+                    result+=s[diagonal];
+                }
+            }
+        }
+        return result;
+    }
+};
