@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+        int open_need=0;
+        int addition=0;
+
+        for(char c:s){
+            if(c=='('){
+                open_need++;
+            }
+            else{
+                if(open_need>0)
+                    open_need--;
+                else
+                    addition++;
+            }
+        }
+        return addition+open_need;     
+    }
+};
