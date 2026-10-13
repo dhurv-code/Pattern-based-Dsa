@@ -1,0 +1,27 @@
+class Solution {
+public:
+    long long maxAlternatingSum(vector<int>& nums) {
+        int n=nums.size();
+        vector<long long>sq(n);
+        // handling the negative number 
+        for(int i=0;i<n;i++){
+            sq[i]=1LL*nums[i]*nums[i];
+        }
+
+        // main process
+        sort(sq.begin(),sq.end());
+        int left=0;
+        int right=n-1;
+        long long score=0;
+
+        while(left<=right){
+            score+=sq[right];
+            right--;
+            if(left<=right){
+                score-=sq[left];
+                left++;
+            }
+        }
+        return score;            
+    }
+};
