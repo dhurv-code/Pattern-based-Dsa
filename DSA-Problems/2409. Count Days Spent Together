@@ -1,0 +1,27 @@
+class Solution {
+public:
+
+    int daysCount(string date){
+        int month=stoi(date.substr(0,2));
+        int days=stoi(date.substr(3,2));
+
+        int daysInMonth[]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};        int totalDays=days;
+        for(int i=0;i<month-1;i++){
+            totalDays+=daysInMonth[i];
+
+        }
+        return totalDays;
+    }
+    int countDaysTogether(string arriveAlice, string leaveAlice, string arriveBob, string leaveBob) {
+        int alicearrive=daysCount(arriveAlice);
+        int aliceleave=daysCount(leaveAlice);
+        int bobarrive=daysCount(arriveBob);
+        int bobleave=daysCount(leaveBob);
+
+        int commonStart=max(alicearrive,bobarrive);
+        int commonend=min(aliceleave,bobleave);
+
+        int result=commonend-commonStart+1;
+        return max(0,result);
+    }
+};
