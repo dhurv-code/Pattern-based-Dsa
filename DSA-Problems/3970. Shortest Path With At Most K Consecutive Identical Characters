@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int shortestPath(int n, vector<vector<int>>& edges, string labels, int k) {
+        vector<vector<pair<int, int>>> graph(n);
+        for (const auto& edge : edges) {
+        graph[edge[0]].push_back({edge[1], edge[2]});
+    }
+        using State = tuple<int, int, int>;
+        priority_queue<State, vector<State>, greater<State>> pq;
+        vector<vector<int>> dist(n, vector<int>(k + 1, 1e9));
+
+        // Starting state at node 0
+        dist[0][1] = 0;
+        pq.push({0, 0, 1});
+        while (!pq.empty()) {
+        auto [d, curr, count] = pq.top();
+        pq.pop();
+
+        // Target node reached (first popping guarantees shortest path)
+        if (curr == n - 1) {
+            return d;
+        }
+
+        // Skip stale states
+        if (d > dist[curr][count]) {
+            continue;
+        }
+
+        for (const auto& [neighbor, weight] : graph[curr]) {
+            int new_count = (labels[neighbor] == labels[curr]) ? count + 1 : 1;
+
+            // Skip invalid states that exceed k consecutive identical characters
+            if (new_count > k) {
+                continue;
+            }
+
+            int new_dist = d + weight;
+
+            // Relaxation step
+            if (new_dist < dist[neighbor][new_count]) {
+                dist[neighbor][new_count] = new_dist;
+                pq.push({new_dist, neighbor, new_count});
+            }
+        }
+    }
+
+    return -1;
+    }
+};
