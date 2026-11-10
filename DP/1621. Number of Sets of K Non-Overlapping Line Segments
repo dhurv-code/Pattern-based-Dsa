@@ -1,3 +1,4 @@
+
 class Solution {
 public:
     int numberOfSets(int n, int k) {
@@ -8,7 +9,6 @@ public:
         for(int i=0;i<n;i++){
             dp[i][0]=1;
             sum[i][0]=i+1;
-
         }
         for(int j=1;j<=k;j++){
             for(int i=0;i<n;i++){
@@ -17,6 +17,7 @@ public:
                 if(i>0)
                     dp[i][j]+=sum[i-1][j-1];
                 dp[i][j]%=MOD;
+
 
                 if(i>0)
                     sum[i][j]=sum[i-1][j];
